@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="=ie=edge">
+        <title>5Head Proger App</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+         <div class="main-block">
+            <div class="vvod">
+                <input type="number" class="form-control" id="day" value="День">
+                <input type="number" class="form-control" id="month" value="Месяц">
+                <input type="number" class="form-control" id="year" value="Год">
+                <input type="text" class="form-control" id="SecondName" value="Фамилия">
+                <input type="text" class="form-control" id="Name" value="Имя">
+                <input type="text" class="form-control" id="Otchestvo" value="Отчество">
+            </div>
+            <div class="butt">
+                <button onclick="SwitchAndSum()" value="Let's go"></button>
+            </div>
+            <div class="vivod">
+                <input type="text" class="form-control" id="textbox">
+            </div>
+         </div>
+                
+        <script>
+            require('./render.js');
+            const fs = require('fs');
+
+            function GetSum(){
+                Day = document.getElementById('day').value;
+                Month = document.getElementById('month').value;
+                Year = document.getElementById('year').value;
+                elements = Day + Month + Year;
+                document.getElementById('result').value = SumNumbers(elements);
+            }
+            function SwitchAndSum(){
+                let Day, Month, Year, SecondName, Name, Otchestvo, Result1, Result2, GoldNumber;
+                var elements = '';
+
+                // Преобразуем дату рожд. в число
+                Day = document.getElementById('day').value;
+                Month = document.getElementById('month').value;
+                Year = document.getElementById('year').value;
+                elements = Day + Month + Year;
+                Result1 = SumNumbersWithExept(elements);
+                // Преобразуем дату рожд. в число
+
+                // Преобразуем ФИО в число
+                SecondName = document.getElementById('SecondName').value;
+                Name = document.getElementById('Name').value;
+                Otchestvo = document.getElementById('Otchestvo').value;
+
+                SecondName = SwitchLetters(SecondName);
+                SecondName = SumNumbers(SecondName);
+                //document.getElementById('SecondName').value = SecondName
+
+                Name = SwitchLetters(Name);
+                Name = SumNumbers(Name);
+                //document.getElementById('Name').value = Name
+                
+                Otchestvo = SwitchLetters(Otchestvo);
+                Otchestvo = SumNumbers(Otchestvo);
+                //document.getElementById('Otchestvo').value = Otchestvo
+                
+                Result2 = SumNumbersWithExept(String(SecondName + Name + Otchestvo));
+                // Преобразуем ФИО в число
+
+                document.getElementById('textbox').value = SumNumbersWithExept(String(Number(Result1)+Number(Result2)));
+                //document.getElementById('FIO').value = SumNumbers(String(SecondName + Name + Otchestvo));              
+                fs.writeFile("Золотое_число.txt", "Строка текста");
+            }
+            function SwitchLetters(str) {  
+                let Array = str.split('');
+                for (i = 0; i < Array.length; i++) {
+                    switch (Array[i]) {
+                    case 'а': Array[i] = '1'
+                        break;
+                    case 'А': Array[i] = '1'
+                        break;
+                    case 'И': Array[i] = '1'
+                        break;
+                    case 'и': Array[i] = '1'
+                        break;
+                    case 'С': Array[i] = '1'
+                        break;
+                    case 'с': Array[i] = '1'
+                        break;
+                    case 'Ъ': Array[i] = '1'
+                        break;
+                    case 'ъ': Array[i] = '1'
+                        break;
+
+                    case 'Б': Array[i] = '2'
+                        break;
+                    case 'б': Array[i] = '2'
+                        break;
+                    case 'Й': Array[i] = '2'
+                        break;
+                    case 'й': Array[i] = '2'
+                        break;
+                    case 'Т': Array[i] = '2'
+                        break;
+                    case 'т': Array[i] = '2'
+                        break;
+                    case 'Ы': Array[i] = '2'
+                        break;
+                    case 'ы': Array[i] = '2'
+                        break;
+                        
+                    case 'В': Array[i] = '3'
+                        break;
+                    case 'в': Array[i] = '3'
+                        break;
+                    case 'К': Array[i] = '3'
+                        break;
+                    case 'к': Array[i] = '3'
+                        break;
+                    case 'У': Array[i] = '3'
+                        break;
+                    case 'у': Array[i] = '3'
+                        break;
+                    case 'Ь': Array[i] = '3'
+                        break;
+                    case 'ь': Array[i] = '3'
+                        break;
+                        
+                    case 'Г': Array[i] = '4'
+                        break;
+                    case 'г': Array[i] = '4'
+                        break;
+                    case 'Л': Array[i] = '4'
+                        break;
+                    case 'л': Array[i] = '4'
+                        break;
+                    case 'Ф': Array[i] = '4'
+                        break;
+                    case 'ф': Array[i] = '4'
+                        break;
+                    case 'Э': Array[i] = '4'
+                        break;
+                    case 'э': Array[i] = '4'
+                        break;
+                        
+                    case 'Д': Array[i] = '5'
+                        break;
+                    case 'д': Array[i] = '5'
+                        break;
+                    case 'М': Array[i] = '5'
+                        break;
+                    case 'м': Array[i] = '5'
+                        break;
+                    case 'Х': Array[i] = '5'
+                        break;
+                    case 'х': Array[i] = '5'
+                        break;
+                    case 'Ю': Array[i] = '5'
+                        break;
+                    case 'ю': Array[i] = '5'
+                        break;
+                        
+                    case 'Е': Array[i] = '6'
+                        break;
+                    case 'е': Array[i] = '6'
+                        break;
+                    case 'Н': Array[i] = '6'
+                        break;
+                    case 'н': Array[i] = '6'
+                        break;
+                    case 'Ц': Array[i] = '6'
+                        break;
+                    case 'ц': Array[i] = '6'
+                        break;
+                    case 'Я': Array[i] = '6'
+                        break;
+                    case 'я': Array[i] = '6'
+                        break;
+                        
+                    case 'Ё': Array[i] = '7'
+                        break;
+                    case 'ё': Array[i] = '7'
+                        break;
+                    case 'О': Array[i] = '7'
+                        break;
+                    case 'о': Array[i] = '7'
+                        break;
+                    case 'Ч': Array[i] = '7'
+                        break;
+                    case 'ч': Array[i] = '7'
+                        break;
+                        
+                    case 'Ж': Array[i] = '8'
+                        break;
+                    case 'ж': Array[i] = '8'
+                        break;
+                    case 'П': Array[i] = '8'
+                        break;
+                    case 'п': Array[i] = '8'
+                        break;
+                    case 'Ш': Array[i] = '8'
+                        break;
+                    case 'ш': Array[i] = '8'
+                        break;
+                        
+                    case 'З': Array[i] = '9'
+                        break;
+                    case 'з': Array[i] = '9'
+                        break;
+                    case 'Р': Array[i] = '9'
+                        break;
+                    case 'р': Array[i] = '9'
+                        break;
+                    case 'Щ': Array[i] = '9'
+                        break;
+                    case 'щ': Array[i] = '9'
+                        break;
+                    }
+                }
+                let String1 = Array.join('');
+                return String1;
+            }
+            function SumNumbers(number){
+                let Sum = 0;
+                do{
+                    for (i=0;i<number.length;i++){
+                    Sum+=Number(number[i]);
+                    }
+                    number=String(Sum);
+                    Sum=0;
+                }while(String(number).length>1);
+                return number;
+            }
+            function SumNumbersWithExept(number){
+                let Sum = 0;
+                do{
+                    if (number==22 || number==11){
+                        return number;
+                    }
+                    for (i=0;i<number.length;i++){
+                    Sum+=Number(number[i]);
+                    }
+                    number=String(Sum);
+                    Sum=0;
+                }while(String(number).length>1);
+                return number;
+            }
+        </script>
+    </body>
+</html>
